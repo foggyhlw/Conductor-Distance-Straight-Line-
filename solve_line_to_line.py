@@ -1,0 +1,20 @@
+import numpy as np
+#两条直线，四个空间点坐标
+a0=np.array([0,6,12])
+a1=np.array([60,2.4,25])
+b0=np.array([0,3.8,12])
+b1=np.array([60,2.9,21.5])
+#每条直线为一个向量
+A=a1-a0
+B=b1-b0
+#求解单位向量
+_A=A/np.linalg.norm(A)
+_B=B/np.linalg.norm(B)
+#单位方向向量叉乘得到法向量（直接用A，B向量求也行）
+n=np.cross(_A,_B)
+#在两条直线上任取一点连线
+AB=b1-a0
+#按照公式A·B=|A|·|B|cos(th)反求B,即distance=|B|*cos(th)=A·B/|A|
+#所取的AB直线可能与法向量夹角为钝角，解出的结果要取绝对值
+distance=abs(np.dot(AB,n)/np.linalg.norm(n))
+print(distance)
